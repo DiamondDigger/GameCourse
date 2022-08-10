@@ -22,7 +22,7 @@ class Layer {
     this.width = 2400;
     this.height = CANVAS_HEIGHT;
     this.x = 0;
-    this.x2 = this.width;
+    // this.x2 = this.width;
     this.y = 0;
     this.image = image;
     this.gameSpeed = gameSpeed;
@@ -32,11 +32,10 @@ class Layer {
   update() {
     this.gameSpeed = gameSpeed;
     this.x < -this.width ? (this.x = 0) : (this.x -= this.speed);
-    this.x2 < 0 ? (this.x2 = this.width) : (this.x2 -= this.speed);
   }
   draw() {
     ctx.drawImage(this.image, this.x, 0);
-    ctx.drawImage(this.image, this.x2, 0);
+    ctx.drawImage(this.image, this.x + this.width, 0);
   }
 }
 
