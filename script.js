@@ -2,7 +2,7 @@ const canvas = document.getElementById("canvas1");
 const ctx = canvas.getContext("2d");
 const CANVAS_WIDTH = (canvas.width = 800);
 const CANVAS_HEIGHT = (canvas.height = 700);
-let gameSpeed = 5;
+let gameSpeed = 7;
 let x = 0;
 let x2 = 2400;
 
@@ -17,12 +17,20 @@ backgroundLayer4.src = "backgroundLayers/layer-4.png";
 const backgroundLayer5 = new Image();
 backgroundLayer5.src = "backgroundLayers/layer-5.png";
 
+const slider = document.getElementById("slider");
+slider.value = gameSpeed;
+const showGameSpeed = document.getElementById("showGameSpeed");
+showGameSpeed.innerHTML = gameSpeed;
+slider.addEventListener("change", function (e) {
+  gameSpeed = e.target.value;
+  showGameSpeed.innerHTML = gameSpeed;
+});
+
 class Layer {
   constructor(image, speedModifier) {
     this.width = 2400;
     this.height = CANVAS_HEIGHT;
     this.x = 0;
-    // this.x2 = this.width;
     this.y = 0;
     this.image = image;
     this.gameSpeed = gameSpeed;
@@ -31,6 +39,7 @@ class Layer {
   }
   update() {
     this.gameSpeed = gameSpeed;
+    this.speed = this.gameSpeed * this.speedModifier;
     this.x < -this.width ? (this.x = 0) : (this.x -= this.speed);
   }
   draw() {
